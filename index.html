@@ -4,10 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <title>Password Generator</title>
 </head>
 
 <body>
+    <main class="container">
+        <img src="images/logo.png" alt="">
+        <h1>Password Generator</h1>
+        <h2 class="password-display">%4@#54KHyrv@~1{ojY5 <img id="eye-password" src="images/eye.png" alt=""><img
+                id="eye-text" src="images/eye-hidden.png" alt=""></h2>
+        <form action="" class="form">
+            <label for="charAmount">
+                No. Of Characters
+            </label>
+            <div class="char-container">
+                <input id="char-range" type="range" min="1" max="50" value="12">
+                <input id="char-num" class="char-num" type="number" min="1" max="50" value="12">
+            </div>
+
+            <label for="uppercase">Uppercase</label>
+            <input id="uppercase" type="checkbox">
+
+            <label for="lowercase">Lowercase</label>
+            <input id="lowercase" type="checkbox">
+
+            <label for="numbers">Numbers</label>
+            <input id="numbers" type="checkbox">
+
+            <label for="symbols">Symbols</label>
+            <input id="symbols" type="checkbox">
+
+            <button class="submit" type="submit">Generate Password</button>
+        </form>
+    </main>
+
     <script src="script.js"></script>
 </body>
 
