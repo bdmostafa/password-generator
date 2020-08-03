@@ -60,8 +60,13 @@ label {
     align-items: center;
 }
 
-.char-num {
+.char-amount {
     width: 3rem;
+    pointer-events: none;
+    border-radius: 2rem;
+    padding: .2rem;
+    border: none;
+    margin-left: .5rem;
 }
 
 .password-display {
