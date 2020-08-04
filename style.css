@@ -75,13 +75,27 @@ p {
     width: 8rem;
     text-align: center;
     justify-content: center;
-    border-radius: 0 0 1rem 1rem;
+    border-radius: 0 0 .75rem .75rem;
 }
 
 #weak,
 #medium,
 #strong {
     display: none;
+}
+
+#copy {
+    position: relative;
+    top: 1rem;
+    right: -8rem;
+    z-index: 1;
+    font-weight: normal;
+    width: 5rem;
+    height: 2.25rem;
+    border-radius: .75rem .75rem 0 0;
+    padding: -1rem;
+    padding: 0.25rem 0 0 0;
+    cursor: pointer;
 }
 
 main {
