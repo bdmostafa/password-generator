@@ -1,6 +1,7 @@
 // https://www.petefreitag.com/cheatsheets/ascii-codes/
 
-// Selectors
+// Selectors ==============================================================
+let validation = false;
 const charRange = document.getElementById('char-range');
 const charAmount = document.getElementById('char-amount');
 const formPassword = document.getElementById('form');
@@ -22,35 +23,55 @@ const lowercaseCharCodes = lowToHighArr(97, 122);
 const numbersCharCodes = lowToHighArr(48, 57);
 const symbolCharCodes = lowToHighArr(33, 47).concat(lowToHighArr(58, 64)).concat(lowToHighArr(91, 96)).concat(lowToHighArr(123, 126));
 
-// Event Listeners
+// Event Listeners ============================================================
 charRange.addEventListener('input', rangeWithAmount);
 formPassword.addEventListener('submit', (event) => {
     event.preventDefault();
+
     const charAmountNum = charAmount.value;
     const uppercase = uppercaseElement.checked;
     const lowercase = lowercaseElement.checked;
     const numbers = numbersElement.checked;
     const symbols = symbolsElement.checked;
 
-    const password = passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols);
-    passwordDisplay.value = password;
+    submitValidation(charAmountNum, uppercase, lowercase, numbers, symbols);
 
-    passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols);
+    if (validation) {
+        const password = passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols);
+        passwordDisplay.value = password;
+
+        passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols);
+    }
+
 })
 eyePassword.addEventListener('click', showPassword);
 eyeText.addEventListener('click', hidePassword);
 copyElement.addEventListener('click', copyPassword);
 
 
-// Functions
+// Functions =========================================================================
+// Function to adjust range number with amount
 function rangeWithAmount(evt) {
     const val = evt.target.value;
     charRange.value = val;
     charAmount.value = val;
 }
 
+// Function to validate SUBMIT button
+function submitValidation(charAmountNum, uppercase, lowercase, numbers, symbols) {
+    if (charAmountNum < 6) {
+        return alert('Range must be 6 or higher. Please try again!');
+    }
+    if (!uppercase && !lowercase && !numbers && !symbols) {
+        return alert('Please select at least one element to generate your password');
+    }
+    return validation = true;
+}
+
+// Function to generate PASSWORD
 function passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols) {
     copyElement.innerText = 'Copy';
+    copyElement.style.fontWeight = 'normal';
 
     let charCodesAll = [];
     if (uppercase) charCodesAll = uppercaseCharCodes;
@@ -66,6 +87,7 @@ function passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols
     return password.join('');
 }
 
+// Function to range (low to high) from ASCII codes table cheat sheets
 function lowToHighArr(low, high) {
     const arr = [];
     for (let i = low; i <= high; i++) {
@@ -103,5 +125,4 @@ function copyPassword() {
     // Select the password
     passwordDisplay.select();
     document.execCommand('copy');
-
 }
