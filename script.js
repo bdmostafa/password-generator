@@ -11,6 +11,9 @@ const symbolsElement = document.getElementById('symbols');
 const passwordDisplay = document.getElementById('password-display');
 const eyePassword = document.getElementById('eye-password');
 const eyeText = document.getElementById('eye-text');
+const weakStatus = document.getElementById('weak');
+const mediumStatus = document.getElementById('medium');
+const strongStatus = document.getElementById('strong');
 
 // From ASCII codes cheat sheets
 const uppercaseCharCodes = lowToHighArr(65, 90);
@@ -30,6 +33,7 @@ formPassword.addEventListener('submit', (event) => {
 
     const password = passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols);
     passwordDisplay.value = password;
+    passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols);
 })
 eyePassword.addEventListener('click', showPassword);
 eyeText.addEventListener('click', hidePassword);
@@ -75,4 +79,13 @@ function hidePassword() {
     eyePassword.style.display = 'block';
     passwordDisplay.type = 'password';
     eyeText.style.display = 'none';
+}
+
+function passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols) {
+    weakStatus.style.display = 'none';
+    mediumStatus.style.display = 'none';
+    strongStatus.style.display = 'none';
+    if (charAmountNum > 12 && numbers && symbols && uppercase || charAmountNum > 12 && numbers && symbols && lowercase || charAmountNum > 12 && numbers && symbols && uppercase && lowercase) strongStatus.style.display = 'block';
+    else if (charAmountNum >= 12 && numbers || charAmountNum >= 12 && symbols || charAmountNum >= 8 && symbols && numbers) mediumStatus.style.display = 'block';
+    else weakStatus.style.display = 'block';
 }
