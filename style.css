@@ -65,6 +65,25 @@ h1 {
     display: none;
 }
 
+p {
+    background-color: rgba(0, 0, 0, 0.747);
+    color: azure;
+    font-weight: bold;
+    padding: .5rem;
+    position: relative;
+    top: -2rem;
+    width: 8rem;
+    text-align: center;
+    justify-content: center;
+    border-radius: 0 0 1rem 1rem;
+}
+
+#weak,
+#medium,
+#strong {
+    display: none;
+}
+
 main {
     background-color: rgba(248, 177, 85, 0.801);
     padding: 5rem;
