@@ -43,6 +43,7 @@ formPassword.addEventListener('submit', (event) => {
         const password = passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols);
         passwordDisplay.value = password;
 
+        // showPassword();
         passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols);
     }
 
@@ -126,7 +127,7 @@ function hidePassword() {
 // Function to check password if it is WEAK, MEDIUM or STRONG
 function passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols) {
 
-    if (charAmountNum > 12 && numbers && symbols && uppercase || charAmountNum > 12 && numbers && symbols && lowercase || charAmountNum > 12 && numbers && symbols && uppercase && lowercase) strongStatus.style.display = 'block';
+    if (charAmountNum >= 12 && numbers && symbols && uppercase || charAmountNum >= 12 && numbers && symbols && lowercase || charAmountNum >= 12 && numbers && symbols && uppercase && lowercase) strongStatus.style.display = 'block';
     else if (charAmountNum >= 12 && symbols || charAmountNum >= 8 && symbols && numbers) mediumStatus.style.display = 'block';
     else weakStatus.style.display = 'block';
 }
