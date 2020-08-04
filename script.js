@@ -9,6 +9,8 @@ const lowercaseElement = document.getElementById('lowercase');
 const numbersElement = document.getElementById('numbers');
 const symbolsElement = document.getElementById('symbols');
 const passwordDisplay = document.getElementById('password-display');
+const eyePassword = document.getElementById('eye-password');
+const eyeText = document.getElementById('eye-text');
 
 // From ASCII codes cheat sheets
 const uppercaseCharCodes = lowToHighArr(65, 90);
@@ -27,8 +29,10 @@ formPassword.addEventListener('submit', (event) => {
     const symbols = symbolsElement.checked;
 
     const password = passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols);
-    passwordDisplay.innerText = password;
+    passwordDisplay.value = password;
 })
+eyePassword.addEventListener('click', showPassword);
+eyeText.addEventListener('click', hidePassword);
 
 
 // Functions
@@ -59,4 +63,16 @@ function lowToHighArr(low, high) {
         arr.push(i);
     }
     return arr;
+}
+
+function showPassword() {
+    eyePassword.style.display = 'none';
+    passwordDisplay.type = 'text';
+    eyeText.style.display = 'block';
+}
+
+function hidePassword() {
+    eyePassword.style.display = 'block';
+    passwordDisplay.type = 'password';
+    eyeText.style.display = 'none';
 }
