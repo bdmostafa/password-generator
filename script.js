@@ -13,6 +13,7 @@ const symbolsElement = document.getElementById('symbols');
 const passwordDisplay = document.getElementById('password-display');
 const eyePassword = document.getElementById('eye-password');
 const eyeText = document.getElementById('eye-text');
+const statusElement = document.getElementById('status-password');
 const weakStatus = document.getElementById('weak');
 const mediumStatus = document.getElementById('medium');
 const strongStatus = document.getElementById('strong');
@@ -25,9 +26,9 @@ const numbersCharCodes = lowToHighArr(48, 57);
 const symbolCharCodes = lowToHighArr(33, 47).concat(lowToHighArr(58, 64)).concat(lowToHighArr(91, 96)).concat(lowToHighArr(123, 126));
 
 // Event Listeners ============================================================
-document.addEventListener('DOMContentLoaded', disabled);
+document.addEventListener('DOMContentLoaded', setDefault);
 charRange.addEventListener('input', rangeWithAmount);
-inputElements.forEach((e) => e.addEventListener('change', disabled));
+inputElements.forEach((e) => e.addEventListener('change', setDefault));
 formPassword.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -39,7 +40,8 @@ formPassword.addEventListener('submit', (event) => {
 
     submitValidation(charAmountNum, uppercase, lowercase, numbers, symbols);
 
-    if (validation) {
+    if (!validation) return setDefault();
+    else {
         const password = passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols);
         passwordDisplay.value = password;
 
@@ -54,12 +56,15 @@ copyElement.addEventListener('click', copyPassword);
 
 
 // Functions =========================================================================
-
-function disabled() {
+// Default function to reset
+function setDefault() {
+    statusElement.style.display = 'block';
     weakStatus.style.display = 'none';
     mediumStatus.style.display = 'none';
     strongStatus.style.display = 'none';
-    copyElement.style.display = 'none';
+    copyElement.style.display = 'block';
+    copyElement.innerText = 'Copy';
+    copyElement.style.fontWeight = 'normal';
     passwordDisplay.value = '';
 }
 
@@ -73,19 +78,20 @@ function rangeWithAmount(evt) {
 // Function to validate SUBMIT button
 function submitValidation(charAmountNum, uppercase, lowercase, numbers, symbols) {
     if (charAmountNum < 6) {
+        // setDefault();
         return alert('Range must be 6 or higher. Please try again!');
     }
     if (!uppercase && !lowercase && !numbers && !symbols) {
+        // setDefault();
         return alert('Please select at least one element to generate your password');
     }
+    // setDefault();
     return validation = true;
 }
 
 // Function to generate PASSWORD
 function passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols) {
-    copyElement.style.display = 'block';
-    copyElement.innerText = 'Copy';
-    copyElement.style.fontWeight = 'normal';
+    setDefault();
 
     let charCodesAll = [];
     if (uppercase) charCodesAll = uppercaseCharCodes;
@@ -126,10 +132,23 @@ function hidePassword() {
 
 // Function to check password if it is WEAK, MEDIUM or STRONG
 function passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols) {
+    statusElement.style.display = 'none';
 
-    if (charAmountNum >= 12 && numbers && symbols && uppercase || charAmountNum >= 12 && numbers && symbols && lowercase || charAmountNum >= 12 && numbers && symbols && uppercase && lowercase) strongStatus.style.display = 'block';
-    else if (charAmountNum >= 12 && symbols || charAmountNum >= 8 && symbols && numbers) mediumStatus.style.display = 'block';
-    else weakStatus.style.display = 'block';
+    // console.log(passwordDisplay.value == '');
+
+    if (!(passwordDisplay.value === '')) {
+        if (charAmountNum >= 12 && numbers && symbols && uppercase ||
+            charAmountNum >= 12 && numbers && symbols && lowercase ||
+            charAmountNum >= 12 && numbers && symbols && uppercase && lowercase) {
+            document.getElementById('weak').style.display = 'none';
+            return strongStatus.style.display = 'block';
+        } else if (charAmountNum >= 12 && symbols ||
+            charAmountNum >= 8 && symbols && numbers) {
+            document.getElementById('weak').style.display = 'none';
+            return mediumStatus.style.display = 'block';
+        } else return weakStatus.style.display = 'block';
+    }
+    // weakStatus.style.display = 'block';
 }
 
 // Function to COPY password and paste it everywhere
