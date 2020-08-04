@@ -14,6 +14,7 @@ const eyeText = document.getElementById('eye-text');
 const weakStatus = document.getElementById('weak');
 const mediumStatus = document.getElementById('medium');
 const strongStatus = document.getElementById('strong');
+const copyElement = document.getElementById('copy');
 
 // From ASCII codes cheat sheets
 const uppercaseCharCodes = lowToHighArr(65, 90);
@@ -33,10 +34,12 @@ formPassword.addEventListener('submit', (event) => {
 
     const password = passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols);
     passwordDisplay.value = password;
+
     passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols);
 })
 eyePassword.addEventListener('click', showPassword);
 eyeText.addEventListener('click', hidePassword);
+copyElement.addEventListener('click', copyPassword);
 
 
 // Functions
@@ -47,6 +50,8 @@ function rangeWithAmount(evt) {
 }
 
 function passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols) {
+    copyElement.innerText = 'Copy';
+
     let charCodesAll = [];
     if (uppercase) charCodesAll = uppercaseCharCodes;
     if (lowercase) charCodesAll = charCodesAll.concat(lowercaseCharCodes);
@@ -85,7 +90,18 @@ function passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols) {
     weakStatus.style.display = 'none';
     mediumStatus.style.display = 'none';
     strongStatus.style.display = 'none';
+
     if (charAmountNum > 12 && numbers && symbols && uppercase || charAmountNum > 12 && numbers && symbols && lowercase || charAmountNum > 12 && numbers && symbols && uppercase && lowercase) strongStatus.style.display = 'block';
     else if (charAmountNum >= 12 && numbers || charAmountNum >= 12 && symbols || charAmountNum >= 8 && symbols && numbers) mediumStatus.style.display = 'block';
     else weakStatus.style.display = 'block';
+}
+
+function copyPassword() {
+    copyElement.innerText = 'Copied!';
+    copyElement.style.fontWeight = 'bold';
+
+    // Select the password
+    passwordDisplay.select();
+    document.execCommand('copy');
+
 }

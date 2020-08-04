@@ -84,13 +84,17 @@ p {
     display: none;
 }
 
+.copied {
+    font-weight: bold;
+}
+
 #copy {
     position: relative;
     top: 1rem;
-    right: -8rem;
+    right: -7.8rem;
     z-index: 1;
     font-weight: normal;
-    width: 5rem;
+    width: 6rem;
     height: 2.25rem;
     border-radius: .75rem .75rem 0 0;
     padding: -1rem;
