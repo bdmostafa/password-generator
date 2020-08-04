@@ -2,6 +2,7 @@
 
 // Selectors ==============================================================
 let validation = false;
+const inputElements = document.querySelectorAll('.input');
 const charRange = document.getElementById('char-range');
 const charAmount = document.getElementById('char-amount');
 const formPassword = document.getElementById('form');
@@ -24,7 +25,9 @@ const numbersCharCodes = lowToHighArr(48, 57);
 const symbolCharCodes = lowToHighArr(33, 47).concat(lowToHighArr(58, 64)).concat(lowToHighArr(91, 96)).concat(lowToHighArr(123, 126));
 
 // Event Listeners ============================================================
+document.addEventListener('DOMContentLoaded', disabled);
 charRange.addEventListener('input', rangeWithAmount);
+inputElements.forEach((e) => e.addEventListener('change', disabled));
 formPassword.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -50,6 +53,15 @@ copyElement.addEventListener('click', copyPassword);
 
 
 // Functions =========================================================================
+
+function disabled() {
+    weakStatus.style.display = 'none';
+    mediumStatus.style.display = 'none';
+    strongStatus.style.display = 'none';
+    copyElement.style.display = 'none';
+    passwordDisplay.value = '';
+}
+
 // Function to adjust range number with amount
 function rangeWithAmount(evt) {
     const val = evt.target.value;
@@ -70,6 +82,7 @@ function submitValidation(charAmountNum, uppercase, lowercase, numbers, symbols)
 
 // Function to generate PASSWORD
 function passwordGenerator(charAmountNum, uppercase, lowercase, numbers, symbols) {
+    copyElement.style.display = 'block';
     copyElement.innerText = 'Copy';
     copyElement.style.fontWeight = 'normal';
 
@@ -96,29 +109,31 @@ function lowToHighArr(low, high) {
     return arr;
 }
 
+// Function to display password in TEXT format
 function showPassword() {
     eyePassword.style.display = 'none';
     passwordDisplay.type = 'text';
     eyeText.style.display = 'block';
 }
 
+// Function to display password in PASSWORD format
 function hidePassword() {
     eyePassword.style.display = 'block';
     passwordDisplay.type = 'password';
     eyeText.style.display = 'none';
 }
 
+// Function to check password if it is WEAK, MEDIUM or STRONG
 function passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols) {
-    weakStatus.style.display = 'none';
-    mediumStatus.style.display = 'none';
-    strongStatus.style.display = 'none';
 
     if (charAmountNum > 12 && numbers && symbols && uppercase || charAmountNum > 12 && numbers && symbols && lowercase || charAmountNum > 12 && numbers && symbols && uppercase && lowercase) strongStatus.style.display = 'block';
-    else if (charAmountNum >= 12 && numbers || charAmountNum >= 12 && symbols || charAmountNum >= 8 && symbols && numbers) mediumStatus.style.display = 'block';
+    else if (charAmountNum >= 12 && symbols || charAmountNum >= 8 && symbols && numbers) mediumStatus.style.display = 'block';
     else weakStatus.style.display = 'block';
 }
 
+// Function to COPY password and paste it everywhere
 function copyPassword() {
+    copyElement.style.display = 'block';
     copyElement.innerText = 'Copied!';
     copyElement.style.fontWeight = 'bold';
 

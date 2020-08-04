@@ -155,3 +155,18 @@ label {
     font-weight: bold;
     color: azure;
 }
+
+footer {
+    margin-top: 2rem;
+}
+
+footer a {
+    color: rgb(3, 68, 3);
+    text-decoration: none;
+}
+
+footer a:hover {
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(1, 82, 1);
+}

@@ -23,28 +23,32 @@
 
         <form id="form" action="" class="form">
             <label for="charAmount">
-                No. Of Characters
+                Range Of Characters
             </label>
             <div class="char-container">
-                <input id="char-range" type="range" min="1" max="50" value="12">
-                <input id="char-amount" class="char-amount" type="number" min="1" max="50" value="12">
+                <input class="input" id="char-range" type="range" min="1" max="50" value="12">
+                <input class="input" id="char-amount" class="char-amount" type="number" min="1" max="50" value="12">
             </div>
 
-            <label for="uppercase">Uppercase</label>
-            <input id="uppercase" type="checkbox">
+            <label class="input" for="uppercase">Uppercase</label>
+            <input class="input" id="uppercase" type="checkbox">
 
-            <label for="lowercase">Lowercase</label>
-            <input id="lowercase" type="checkbox">
+            <label class="input" for="lowercase">Lowercase</label>
+            <input class="input" id="lowercase" type="checkbox">
 
-            <label for="numbers">Numbers</label>
-            <input id="numbers" type="checkbox">
+            <label class="input" for="numbers">Numbers</label>
+            <input class="input" id="numbers" type="checkbox">
 
-            <label for="symbols">Symbols</label>
-            <input id="symbols" type="checkbox">
+            <label class="input" for="symbols">Symbols</label>
+            <input class="input" id="symbols" type="checkbox">
 
             <button class="submit" type="submit">Generate Password</button>
         </form>
+        <footer>
+            <h6>Developed by <a href="https://github.com/bdmostafa">Mostafa</a> </h6>
+        </footer>
     </main>
+
 
     <script src="script.js"></script>
 </body>
