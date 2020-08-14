@@ -146,7 +146,9 @@ function passwordStatus(charAmountNum, uppercase, lowercase, numbers, symbols) {
             charAmountNum >= 8 && symbols && numbers) {
             document.getElementById('weak').style.display = 'none';
             return mediumStatus.style.display = 'block';
-        } else return weakStatus.style.display = 'block';
+        } else if (charAmountNum < 8 && uppercase || charAmountNum < 8 && lowercase || charAmountNum < 8 && lowercase && uppercase || lowercase || uppercase || numbers) {
+            return weakStatus.style.display = 'block';
+        }
     }
     // weakStatus.style.display = 'block';
 }
